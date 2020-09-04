@@ -44,41 +44,8 @@ class SubscriptionGroup extends Component {
 
     return (
       <div className="subscription-container">
-        <SubscriptionGroupHeader orderId={order.id} />
-        {order.status === 2 ? <SubscriptionGroupAuthCreditCard orderId={order.id} /> : null}
-        {
-          hasDeletedProducts ? null :
-          <div className="subscription-content-container">
-            <div
-              className="toggle-subscription-content text-button"
-              onClick={this.toggleDetails}
-              role="presentation"
-            >
-              <p>
-                <Translation
-                  textKey={
-                    this.state.contentAltered ?
-                      'toggle_subscription_details_altered' :
-                      'toggle_subscription_details'
-                  }
-                />
-              </p>
-            </div>
-            <div className={classnames('subscription-content', this.state.contentAltered ? '' : 'altered')}>
-              <AddressShippingBlock orderId={order.id} disabled={order.status !== 0} />
-              <PaymentInformationBlock orderId={order.id} status={order.status} />
-              <OrderProductsBlock orderId={order.id} disabled={order.status !== 0} />
-              <UpcomingOrdersBlock orderId={order.id} disabled={order.status !== 0} />
-              <OrderDiscountBlock orderId={order.id} disabled={order.status !== 0} />
-              <TransactionHistoryBlock orderId={order.id} />
-              {
-                (order.is_cancellable) ?
-                  <OrderCancellationBlock orderId={order.id} /> :
-                  null
-              }
-            </div>
-          </div>
-        }
+        <UpcomingOrdersBlock orderId={order.id} disabled={order.status !== 0} />
+
       </div>
     );
   }

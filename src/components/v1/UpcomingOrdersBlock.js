@@ -42,6 +42,7 @@ class UpcomingOrdersBlock extends Component {
 
   render() {
     const { order } = this.props;
+    console.log(order.next_orders[0])
     let upcomingOrderList = (
       order.next_orders.map(d => (
         order.build_a_box ?
@@ -69,6 +70,7 @@ class UpcomingOrdersBlock extends Component {
     return (
       <SubscriptionContentBlock
         titleTranslationKey="upcoming_orders_title"
+        opened
       >
         {
           this.props.productUpcomingQuantityMessage && this.props.productUpcomingQuantityMessage.type === 'success' ?
@@ -82,7 +84,8 @@ class UpcomingOrdersBlock extends Component {
             />
             : null
         }
-        {upcomingOrderList}
+
+        <UpcomingOrder key={`${order.id}-${order.next_orders[0]}`} orderId={order.id} date={order.next_orders[0]} toggleEditQuantity={this.toggleEditQuantity} />
       </SubscriptionContentBlock>
     );
   }
